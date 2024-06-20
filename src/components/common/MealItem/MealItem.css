@@ -1,0 +1,7 @@
+.meal-list-item {
+    background-color: #AA8E86;
+}
+
+.meal-title:hover {
+    text-decoration: underline;
+}
