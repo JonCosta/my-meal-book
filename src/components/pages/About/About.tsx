@@ -1,8 +1,36 @@
+import { cssCenterDiv } from "../../../utils/Constants";
+import AboutItem from "../../common/AboutItem/AboutItem";
+
 const AboutPage: React.FC = () => {
+
     return (
-        <h1>
-            This is about
-        </h1>
+        <div className={cssCenterDiv}>
+            <div className="flex flex-col gap-8">
+                <AboutItem 
+                    title="What is My Meal Book?"
+                    description="My Meal Book was created using the following tools:"
+                    titleSize="text-4xl"
+                />
+
+                <AboutItem
+                    title="React"
+                    description="A JavaScript library used to create web and native user interfaces."
+                    sourceUrl="https://react.dev"
+                />
+
+                <AboutItem 
+                    title="Tailwind CSS"
+                    description="A utility-first CSS framework for rapid UI development."
+                    sourceUrl="https://tailwindcss.com/"
+                />
+                
+                <AboutItem 
+                    title="TheMealDB"
+                    description="An open, crowd-sourced database of Recipes from around the world."
+                    sourceUrl="https://www.themealdb.com/api.php"
+                />
+            </div>
+        </div>
     );
 }
 

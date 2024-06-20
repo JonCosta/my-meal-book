@@ -5,7 +5,7 @@ import Ingredient from "../../../models/Ingredient";
 import Meal from "../../../models/Meal";
 import { theMealDbEndpoint } from "../../../utils/Constants";
 
-function MealPage() {
+const MealPage: React.FC = () => {
     const { id } = useParams();
     const [meal, setMeal] = useState(new Meal());
     const [isLoading, setIsLoading] = useState(false);
@@ -14,10 +14,8 @@ function MealPage() {
     const cssMealTitle = "text-center text-3xl font-semibold capitalize";
 
     useEffect(() => {
-        console.log('Props:', id);
         fetchRecipeById(id);
-
-    }, []);
+    }, [id]);
 
     const fetchRecipeById = async (id: string | undefined) => {
         if (id === undefined) return;
