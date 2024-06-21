@@ -82,10 +82,10 @@ class HomePage extends Component {
 
         return (
             <div className={cssCenterDiv}>
-                <h1 className="text-5xl text-center text-white font-bold font-title">
+                <h1 className="text-4xl md:text-7xl text-center text-white font-bold font-title">
                     My Meal Book
                 </h1>
-                <h2 className="text-2xl text-center text-white mt-8">
+                <h2 className="text-lg md:text-2xl text-center text-white mt-2 font-bold">
                     Looking for delicious meals and recipes? We got your back!
                 </h2>
                 {isLoading &&

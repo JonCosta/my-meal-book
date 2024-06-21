@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer className="bg-primary text-white w-full p-4 self-end">
             <div className="text-center text-sm">
-                <p className="mt-8 md:mt-0 font-semibold">
+                <p className="font-semibold">
                     &copy; Jojo Costa - {currentYear}
                 </p>
             </div>

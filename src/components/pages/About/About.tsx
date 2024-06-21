@@ -6,9 +6,9 @@ const AboutPage: React.FC = () => {
     return (
         <div className={cssCenterDiv}>
             <div className="flex flex-col gap-8">
-                <AboutItem 
+                <AboutItem
                     title="What is My Meal Book?"
-                    description="My Meal Book was created using the following tools:"
+                    description="My Meal Book is a small project created with the purposes of learning and practicing the basic concepts of React. It was created using the following tools:"
                     titleSize="text-4xl"
                 />
 
@@ -18,13 +18,13 @@ const AboutPage: React.FC = () => {
                     sourceUrl="https://react.dev"
                 />
 
-                <AboutItem 
+                <AboutItem
                     title="Tailwind CSS"
                     description="A utility-first CSS framework for rapid UI development."
                     sourceUrl="https://tailwindcss.com/"
                 />
-                
-                <AboutItem 
+
+                <AboutItem
                     title="TheMealDB"
                     description="An open, crowd-sourced database of Recipes from around the world."
                     sourceUrl="https://www.themealdb.com/api.php"
