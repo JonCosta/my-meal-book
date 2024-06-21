@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/my-meal-book/static/css/main.27829526.css",
+    "main.js": "/my-meal-book/static/js/main.477c8102.js",
+    "static/js/453.bbbbfa98.chunk.js": "/my-meal-book/static/js/453.bbbbfa98.chunk.js",
+    "index.html": "/my-meal-book/index.html",
+    "main.27829526.css.map": "/my-meal-book/static/css/main.27829526.css.map",
+    "main.477c8102.js.map": "/my-meal-book/static/js/main.477c8102.js.map",
+    "453.bbbbfa98.chunk.js.map": "/my-meal-book/static/js/453.bbbbfa98.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27829526.css",
+    "static/js/main.477c8102.js"
+  ]
+}
