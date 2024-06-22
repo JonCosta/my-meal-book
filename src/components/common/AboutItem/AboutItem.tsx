@@ -6,7 +6,8 @@ type AboutItemProps = {
     sourceUrl?: string;
     titleSize?: 'text-2xl' | 'text-4xl';
 }
-const AboutItem: React.FC<AboutItemProps> = ({title, description, sourceUrl, titleSize = 'text-2xl'}) => {
+
+const AboutItem: React.FC<AboutItemProps> = ({ title, description, sourceUrl, titleSize = 'text-2xl' }) => {
     return (
         <div className="flex flex-col gap-3 items-start">
             <h1 className={`${titleSize} font-bold font-title text-white`}>
