@@ -6,7 +6,7 @@ import MealPage from "./components/pages/Meal/Meal";
 
 function AppRoutes() {
     return (
-        <Router>
+        <Router basename="/my-meal-book">
             <Routes>
                 <Route path="/" Component={Layout}>
                     <Route index Component={HomePage} />
