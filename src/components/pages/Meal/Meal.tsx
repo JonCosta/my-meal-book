@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Ingredient from "../../../models/Ingredient";
 import Meal from "../../../models/Meal";
 import { theMealDbEndpoint } from "../../../utils/Constants";
+import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 
 const MealPage: React.FC = () => {
     const { id } = useParams();
@@ -36,9 +37,7 @@ const MealPage: React.FC = () => {
     return (
         <div className={cssContainer}>
             {isLoading &&
-                <h1 className={cssMealTitle}>
-                    Loading...
-                </h1>
+                <LoadingLabel />
             }
             {meal &&
                 <>
@@ -54,8 +53,8 @@ const MealPage: React.FC = () => {
                         </h2>
                         <ul>
                             {meal.ingredients.map((ingredient: Ingredient) => (
-                                <li key={ingredient.name} className="capitalize">
-                                    - {ingredient.name} ({ingredient.measure})
+                                <li key={ingredient.name}>
+                                    - <span className="capitalize">{ingredient.name}</span> ({ingredient.measure})
                                 </li>
                             ))}
                         </ul>
@@ -65,7 +64,7 @@ const MealPage: React.FC = () => {
                         <h2 className="font-bold">
                             Instructions:
                         </h2>
-                        <p>
+                        <p className="whitespace-pre-wrap">
                             {meal.instructions}
                         </p>
                     </div>

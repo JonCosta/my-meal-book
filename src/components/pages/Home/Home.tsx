@@ -4,6 +4,7 @@ import Meal from "../../../models/Meal";
 import { cssCenterDiv } from "../../../utils/Constants";
 import MealItem from "../../common/MealItem/MealItem";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
+import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 
 class HomePage extends Component {
 
@@ -89,7 +90,7 @@ class HomePage extends Component {
                     Looking for delicious meals and recipes? We got your back!
                 </h2>
                 {isLoading &&
-                    <p className="text-white">Searching...</p>
+                    <LoadingLabel labelText="Searching..." />
                 }
 
                 <div className="relative my-6 rounded-md shadow-sm">
