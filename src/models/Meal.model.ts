@@ -50,7 +50,7 @@ class Meal {
                         break;
 
                     case "strMealThumb":
-                        this.urlThumbnail = mealProperty;
+                        this.urlThumbnail = mealProperty + "/preview";
                         break;
 
                     case "strInstructions":
@@ -62,7 +62,7 @@ class Meal {
                         break;
 
                     case "strYoutube":
-                        this.youtubeLink = mealProperty;
+                        this.youtubeLink = this.formatYoutubeLink(mealProperty);
                         break;
 
                     default:
@@ -82,6 +82,10 @@ class Meal {
                 this.ingredients.push(ingredient);
             }
         }
+    }
+
+    private formatYoutubeLink(youtubeLink: string) {
+        return youtubeLink.replaceAll("watch?v=", "embed/");
     }
 }
 

@@ -1,0 +1,7 @@
+.meal-name {
+    @apply text-center text-5xl font-bold capitalize pb-3 mb-3;
+}
+
+.meal-subtitle {
+    @apply font-bold text-xl pb-3;
+}

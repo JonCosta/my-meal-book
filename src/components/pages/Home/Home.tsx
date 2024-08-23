@@ -1,10 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
-import Meal from "../../../models/Meal";
-import { cssCenterDiv } from "../../../utils/Constants";
+import Meal from "../../../models/Meal.model";
+import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import MealItem from "../../common/MealItem/MealItem";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
-import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 
 class HomePage extends Component {
 
@@ -19,12 +18,13 @@ class HomePage extends Component {
 
     handleChangeSearch = (event: any) => {
         const query = event.target.value;
+        clearTimeout(this.searchTimer);
+
         if (query === '') {
             this.clearSearch();
             return;
         }
 
-        clearTimeout(this.searchTimer);
         this.searchTimer = setTimeout(() => {
             this.fetchMealList(query);
         }, 300);
@@ -37,7 +37,7 @@ class HomePage extends Component {
 
             if (response.data.meals != null) {
                 let mealList = this.generateMealListFromApiResponse(response.data.meals);
-                mealList = this.sortMealListByName(mealList);
+                mealList = this.sortElementListByName(mealList);
 
                 this.setState({
                     isLoading: false,
@@ -64,11 +64,11 @@ class HomePage extends Component {
         return apiMealList.map(apiMeal => new Meal(apiMeal));
     }
 
-    sortMealListByName(mealList: Meal[]) {
-        mealList = mealList.sort((mealA, mealB) => {
-            return mealA.name.localeCompare(mealB.name);
+    sortElementListByName(elementList: any[]) {
+        elementList = elementList.sort((elementA, elementB) => {
+            return elementA.name.localeCompare(elementB.name);
         });
-        return mealList;
+        return elementList;
     }
 
     clearSearch = () => {
@@ -82,16 +82,13 @@ class HomePage extends Component {
         const { mealList, isLoading } = this.state;
 
         return (
-            <div className={cssCenterDiv}>
+            <div className="center-container">
                 <h1 className="text-4xl md:text-7xl text-center text-white font-bold font-title">
                     My Meal Book
                 </h1>
-                <h2 className="text-lg md:text-2xl text-center text-white mt-2 font-bold">
+                <h2 className="text-lg md:text-2xl text-center text-white mt-2 font-bold font-body">
                     Looking for delicious meals and recipes? We got your back!
                 </h2>
-                {isLoading &&
-                    <LoadingLabel labelText="Searching..." />
-                }
 
                 <div className="relative my-6 rounded-md shadow-sm">
                     <input type="text" name="search" id="search" className="block w-full rounded-md p-4 
@@ -100,8 +97,12 @@ class HomePage extends Component {
                         onInput={this.handleChangeSearch}></input>
                 </div>
 
-                {mealList.length === 0 &&
+                {(!isLoading && mealList.length === 0) &&
                     <SurpriseMeButton />
+                }
+
+                {isLoading &&
+                    <LoadingLabel labelText="Searching..." />
                 }
 
                 <div className="item-list">

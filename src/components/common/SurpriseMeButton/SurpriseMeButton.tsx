@@ -20,7 +20,7 @@ const SurpriseMeButton: React.FC = () => {
     }
 
     return (
-        <button type="button" id="btn-surprise-me" className="w-full px-5 py-2.5 rounded-lg"
+        <button type="button" id="btn-surprise-me" className="w-full px-5 py-2.5 rounded-lg font-bold font-body"
             onClick={handleClickSurpriseBtn}>
             Surprise me!
         </button>

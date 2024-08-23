@@ -1,10 +1,9 @@
-import { cssCenterDiv } from "../../../utils/Constants";
 import AboutItem from "../../common/AboutItem/AboutItem";
 
 const AboutPage: React.FC = () => {
 
     return (
-        <div className={cssCenterDiv}>
+        <div className="center-container">
             <div className="flex flex-col gap-8">
                 <AboutItem
                     title="What is My Meal Book?"

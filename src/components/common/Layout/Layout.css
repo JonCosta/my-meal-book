@@ -1,0 +1,8 @@
+#layout-body {
+    background-image: url("../../../assets/images/meal-banner2.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: #1A1D2A; */
+}
