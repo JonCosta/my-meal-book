@@ -1,4 +1,4 @@
-import { isStringInformed } from "../utils/StringUtils";
+import { isStringEmpty } from "../utils/StringUtils";
 import Ingredient from "./Ingredient";
 
 class Meal {
@@ -51,7 +51,7 @@ class Meal {
                         break;
 
                     case "strMealThumb":
-                        this.urlThumbnail = mealProperty + "/preview";
+                        this.urlThumbnail = mealProperty;
                         break;
 
                     case "strInstructions":
@@ -78,7 +78,7 @@ class Meal {
             const ingredientAtIndex = mealFromApi["strIngredient" + index];
             const measureAtIndex = mealFromApi["strMeasure" + index];
 
-            if (isStringInformed(ingredientAtIndex)) {
+            if (!isStringEmpty(ingredientAtIndex)) {
                 let ingredient = new Ingredient(ingredientAtIndex, measureAtIndex);
                 this.ingredients.push(ingredient);
             }

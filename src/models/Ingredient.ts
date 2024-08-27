@@ -1,4 +1,4 @@
-import { isStringInformed } from "../utils/StringUtils";
+import { isStringEmpty } from "../utils/StringUtils";
 
 class Ingredient {
     name: string = '';
@@ -6,7 +6,7 @@ class Ingredient {
 
     constructor(name: string, measure: string) {
         this.name = name;
-        if (isStringInformed(measure)) {
+        if (!isStringEmpty(measure)) {
             this.measure = measure;
         }
     }
