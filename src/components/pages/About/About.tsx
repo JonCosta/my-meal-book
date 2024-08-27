@@ -1,10 +1,13 @@
 import AboutItem from "../../common/AboutItem/AboutItem";
+import HomeButton from "../../common/HomeButton/HomeButton";
 
 const AboutPage: React.FC = () => {
 
     return (
-        <div className="center-container">
+        <>
+            <HomeButton />
             <div className="flex flex-col gap-8">
+
                 <AboutItem
                     title="What is My Meal Book?"
                     description="My Meal Book is a small project created with the purposes of learning and practicing the basic concepts of React. It was created using the following tools:"
@@ -28,8 +31,19 @@ const AboutPage: React.FC = () => {
                     description="An open, crowd-sourced database of Recipes from around the world."
                     sourceUrl="https://www.themealdb.com/api.php"
                 />
+                <AboutItem
+                    title="TheMealDB"
+                    description="An open, crowd-sourced database of Recipes from around the world."
+                    sourceUrl="https://www.themealdb.com/api.php"
+                />
+                <div>
+                    Background photo by <a className='underline hover:no-underline' target="_blank" rel="noreferrer"
+                        href="https://unsplash.com/pt-br/@rumanamin?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Rumman Amin</a>
+                    &nbsp;on <a className='underline hover:no-underline' target="_blank" rel="noreferrer"
+                        href="https://unsplash.com/pt-br/fotografias/alimentos-do-tipo-variado-nKs-oXRGGEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

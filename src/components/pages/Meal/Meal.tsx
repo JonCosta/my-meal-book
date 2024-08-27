@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Ingredient from "../../../models/Ingredient";
 import Meal from "../../../models/Meal.model";
 import { theMealDbEndpoint } from "../../../utils/Constants";
+import HomeButton from "../../common/HomeButton/HomeButton";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import "./Meal.css";
 
@@ -33,36 +34,44 @@ const MealPage: React.FC = () => {
     }
 
     return (
-        <div className="center-container">
+        <div>
             {isLoading &&
                 <LoadingLabel />
             }
             {(meal && !isLoading) &&
                 <>
-                    <h1 className="meal-name font-title">
+                    <HomeButton />
+
+                    <h1 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold capitalize pb-3 font-title">
                         {meal.name}
                     </h1>
-                    <img className="h-60 w-60 rounded mx-auto mb-5"
+                    <img className="h-32 w-32 md:h-48 md:w-48 lg:h-60 lg:w-60 rounded mx-auto mb-5"
                         src={meal.urlThumbnail} alt="" />
 
                     <div className="mb-5">
-                        <h2 className="meal-subtitle">
+                        <h2 className="font-bold text-lg md:text-xl pb-3">
                             Ingredients
                         </h2>
-                        <ul className="divide-y divide-gray-700 list-disc ml-5 font-body">
+                        <ul className="divide-y divide-gray-700 list-disc ml-4">
                             {meal.ingredients.map((ingredient: Ingredient, index: number) => (
-                                <li className="py-2" key={index}>
-                                    <span className="capitalize">{ingredient.name}</span> ({ingredient.measure})
+                                <li className="py-2 text-xs md:text-base font-body" key={index}>
+                                    <span className="capitalize">{ingredient.name}</span>
+                                    &nbsp;
+                                    {ingredient.measure &&
+                                        <>
+                                            ({ingredient.measure})
+                                        </>
+                                    }
                                 </li>
                             ))}
                         </ul>
                     </div>
 
                     <div className="mb-5">
-                        <h2 className="meal-subtitle">
+                        <h2 className="font-bold text-lg md:text-xl pb-3">
                             How to prepare
                         </h2>
-                        <p className="whitespace-pre-wrap font-body">
+                        <p className="whitespace-pre-wrap text-xs md:text-base font-body">
                             {meal.instructions}
                         </p>
                     </div>

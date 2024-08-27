@@ -21,7 +21,7 @@ const Header: React.FC = () => {
                     My Meal Book
                 </span>
 
-                <span className="text-sm font-bold cursor-pointer" onClick={handleClickAbout}>
+                <span className="text-sm font-body font-bold cursor-pointer" onClick={handleClickAbout}>
                     About
                 </span>
             </div>

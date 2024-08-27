@@ -1,10 +1,14 @@
+import { isStringInformed } from "../utils/StringUtils";
+
 class Ingredient {
     name: string = '';
     measure: string = '';
 
-    constructor(name: string, measure?: string) {
+    constructor(name: string, measure: string) {
         this.name = name;
-        this.measure = measure || '';
+        if (isStringInformed(measure)) {
+            this.measure = measure;
+        }
     }
 
 }

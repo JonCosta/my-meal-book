@@ -1,3 +1,4 @@
+import { isStringInformed } from "../utils/StringUtils";
 import Ingredient from "./Ingredient";
 
 class Meal {
@@ -77,7 +78,7 @@ class Meal {
             const ingredientAtIndex = mealFromApi["strIngredient" + index];
             const measureAtIndex = mealFromApi["strMeasure" + index];
 
-            if (ingredientAtIndex != null && ingredientAtIndex !== "") {
+            if (isStringInformed(ingredientAtIndex)) {
                 let ingredient = new Ingredient(ingredientAtIndex, measureAtIndex);
                 this.ingredients.push(ingredient);
             }
@@ -87,6 +88,7 @@ class Meal {
     private formatYoutubeLink(youtubeLink: string) {
         return youtubeLink.replaceAll("watch?v=", "embed/");
     }
+
 }
 
 export default Meal;

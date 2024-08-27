@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import Meal from "../../../models/Meal.model";
+import { theMealDbEndpoint } from "../../../utils/Constants";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import MealItem from "../../common/MealItem/MealItem";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
@@ -13,7 +14,6 @@ class HomePage extends Component {
         searchQuery: ''
     };
 
-    endpointUrl: string = "https://themealdb.com/api/json/v1/1";
     searchTimer: any = null;
 
     handleChangeSearch = (event: any) => {
@@ -33,7 +33,7 @@ class HomePage extends Component {
     fetchMealList = async (query: string) => {
         try {
             this.setState({ isLoading: true });
-            const response = await axios.get(`${this.endpointUrl}/search.php?s=${query}`);
+            const response = await axios.get(`${theMealDbEndpoint}/search.php?s=${query}`);
 
             if (response.data.meals != null) {
                 let mealList = this.generateMealListFromApiResponse(response.data.meals);
@@ -82,17 +82,19 @@ class HomePage extends Component {
         const { mealList, isLoading } = this.state;
 
         return (
-            <div className="center-container">
-                <h1 className="text-4xl md:text-7xl text-center text-white font-bold font-title">
+            <div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-white font-bold font-title">
                     My Meal Book
                 </h1>
-                <h2 className="text-lg md:text-2xl text-center text-white mt-2 font-bold font-body">
-                    Looking for delicious meals and recipes? We got your back!
+                <h2 className="text-md md:text-lg lg:text-xl text-center text-white mt-2 font-semibold font-body">
+                    Looking for delicious meals and recipes?
+                    <br />
+                    We got your back!
                 </h2>
 
                 <div className="relative my-6 rounded-md shadow-sm">
-                    <input type="text" name="search" id="search" className="block w-full rounded-md p-4 
-                        text-gray-900 placeholder:text-gray-500 sm:text-sm"
+                    <input type="text" name="search" id="search" className="block w-full rounded-md p-3
+                        text-gray-900 placeholder:text-gray-500 placeholder:text-sm lg:placeholder:text-md"
                         placeholder="What would you like to eat? :)" autoComplete="off"
                         onInput={this.handleChangeSearch}></input>
                 </div>
