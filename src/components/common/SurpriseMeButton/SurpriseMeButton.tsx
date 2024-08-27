@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { theMealDbEndpoint } from "../../../utils/Constants";
+import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
 import './SurpriseMeButton.css';
 
 const SurpriseMeButton: React.FC = () => {
@@ -8,7 +8,7 @@ const SurpriseMeButton: React.FC = () => {
 
     const handleClickSurpriseBtn = async () => {
         try {
-            const response = await axios.get(`${theMealDbEndpoint}/random.php`);
+            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/random.php`);
             if (response.data.meals != null) {
                 const mealId = response.data.meals[0].idMeal;
                 navigate('/meal/' + mealId);

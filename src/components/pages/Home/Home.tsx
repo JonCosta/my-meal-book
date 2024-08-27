@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Component } from "react";
+import Category from "../../../models/Category.model";
 import Meal from "../../../models/Meal.model";
-import { theMealDbEndpoint } from "../../../utils/Constants";
+import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
+import CategoryItem from "../../common/CategoryItem/CategoryItem";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import MealItem from "../../common/MealItem/MealItem";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
@@ -9,12 +11,17 @@ import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
 class HomePage extends Component {
 
     state = {
+        categoryList: [],
         isLoading: false,
         mealList: [],
         searchQuery: ''
     };
 
     searchTimer: any = null;
+
+    componentDidMount(): void {
+        this.fetchCategoryList();
+    }
 
     handleChangeSearch = (event: any) => {
         const query = event.target.value;
@@ -33,7 +40,7 @@ class HomePage extends Component {
     fetchMealList = async (query: string) => {
         try {
             this.setState({ isLoading: true });
-            const response = await axios.get(`${theMealDbEndpoint}/search.php?s=${query}`);
+            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/search.php?s=${query}`);
 
             if (response.data.meals != null) {
                 let mealList = this.generateMealListFromApiResponse(response.data.meals);
@@ -60,8 +67,27 @@ class HomePage extends Component {
         }
     }
 
+    fetchCategoryList = async () => {
+        try {
+            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/categories.php`);
+            let categoryList = this.generateCategoryListFromApiResponse(response.data.categories);
+            categoryList = this.sortElementListByName(categoryList);
+
+            this.setState({
+                categoryList: categoryList,
+            });
+
+        } catch (fetchError) {
+            console.error(fetchError);
+        }
+    }
+
     generateMealListFromApiResponse(apiMealList: any[]) {
         return apiMealList.map(apiMeal => new Meal(apiMeal));
+    }
+
+    generateCategoryListFromApiResponse(apiCategoryList: any[]) {
+        return apiCategoryList.map(apiCategory => new Category(apiCategory));
     }
 
     sortElementListByName(elementList: any[]) {
@@ -79,7 +105,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { mealList, isLoading } = this.state;
+        const { mealList, isLoading, categoryList } = this.state;
 
         return (
             <div>
@@ -100,7 +126,15 @@ class HomePage extends Component {
                 </div>
 
                 {(!isLoading && mealList.length === 0) &&
-                    <SurpriseMeButton />
+                    <>
+                        <div className="grid grid-cols-3 gap-2 mb-4">
+                            {categoryList.map((category: any) => (
+                                <CategoryItem category={category} />
+                            ))}
+                        </div>
+
+                        <SurpriseMeButton />
+                    </>
                 }
 
                 {isLoading &&

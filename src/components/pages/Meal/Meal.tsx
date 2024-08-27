@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Ingredient from "../../../models/Ingredient";
 import Meal from "../../../models/Meal.model";
-import { theMealDbEndpoint } from "../../../utils/Constants";
+import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
 import HomeButton from "../../common/HomeButton/HomeButton";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import "./Meal.css";
@@ -22,7 +22,7 @@ const MealPage: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.get(`${theMealDbEndpoint}/lookup.php?i=${id}`);
+            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/lookup.php?i=${id}`);
             const mealFromAPI = response.data.meals[0];
             setMeal(new Meal(mealFromAPI));
             setIsLoading(false);
