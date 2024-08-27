@@ -78,7 +78,7 @@ const MealPage: React.FC = () => {
 
                     {meal.youtubeLink &&
                         <div className="mb-5 h-96">
-                            <iframe className="mx-auto" width="100%" height="100%"
+                            <iframe id="meal-video" title="Instructions Video" className="mx-auto" width="100%" height="100%"
                                 src={meal.youtubeLink}>
                             </iframe>
                         </div>
