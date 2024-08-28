@@ -4,8 +4,10 @@ import Category from '../../../models/Category.model';
 import { THE_MEALDB_ENDPOINT } from '../../../utils/Constants';
 import { sortElementListByName } from '../../../utils/StringUtils';
 import CategoryItem from '../CategoryItem/CategoryItem';
+import LoadingLabel from '../LoadingLabel/LoadingLabel';
 
 const CategoryList: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [items, setItems] = useState<Category[]>([]);
 
     const generateCategoryListFromApiResponse = (apiCategoryList: any[]) => {
@@ -14,16 +16,17 @@ const CategoryList: React.FC = () => {
 
     useEffect(() => {
         const fetchCategoryList = async () => {
-            console.log('CategoryList');
-
             try {
+                setIsLoading(true);
                 const response = await axios.get(`${THE_MEALDB_ENDPOINT}/categories.php`);
                 let categoryList = generateCategoryListFromApiResponse(response.data.categories);
                 categoryList = sortElementListByName(categoryList);
                 setItems(categoryList);
+                setIsLoading(false);
 
             } catch (fetchError) {
                 console.error(fetchError);
+                setIsLoading(false);
             }
         }
 
@@ -32,7 +35,10 @@ const CategoryList: React.FC = () => {
 
     return (
         <>
-            {items.length !== 0 &&
+            {isLoading &&
+                <LoadingLabel labelText="Searching..." />
+            }
+            {(!isLoading && items.length !== 0) &&
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
                     {items.map((category: Category) => (
                         <CategoryItem key={category.id} category={category} />
