@@ -1,3 +1,4 @@
+import { MapPinIcon, TagIcon } from "@heroicons/react/16/solid";
 import { useNavigate } from "react-router-dom";
 import Meal from "../../../models/Meal.model";
 
@@ -27,18 +28,13 @@ const MealItem: React.FC<MealItemProps> = ({ meal }) => {
                     <div className="flex flex-row gap-3">
                         {meal.area &&
                             <div className="flex flex-row items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                                </svg>
+                                <MapPinIcon className="size-4 mr-1" />
                                 <span className="font-semibold text-sm md:text-base">{meal.area}</span>
                             </div>
                         }
                         {meal.category &&
                             <div className="flex flex-row items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
-                                </svg>
+                                <TagIcon className="size-4 mr-1" />
                                 <span className="font-semibold text-sm md:text-base">{meal.category}</span>
                             </div>
                         }
