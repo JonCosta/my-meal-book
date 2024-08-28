@@ -1,9 +1,11 @@
 import axios from "axios";
 import { Component } from "react";
 import Meal from "../../../models/Meal.model";
-import { theMealDbEndpoint } from "../../../utils/Constants";
+import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
+import { sortElementListByName } from "../../../utils/StringUtils";
+import CategoryList from "../../common/CategoryList/CategoryList";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
-import MealItem from "../../common/MealItem/MealItem";
+import MealList from "../../common/MealList/MealList";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
 
 class HomePage extends Component {
@@ -33,11 +35,11 @@ class HomePage extends Component {
     fetchMealList = async (query: string) => {
         try {
             this.setState({ isLoading: true });
-            const response = await axios.get(`${theMealDbEndpoint}/search.php?s=${query}`);
+            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/search.php?s=${query}`);
 
             if (response.data.meals != null) {
                 let mealList = this.generateMealListFromApiResponse(response.data.meals);
-                mealList = this.sortElementListByName(mealList);
+                mealList = sortElementListByName(mealList);
 
                 this.setState({
                     isLoading: false,
@@ -64,13 +66,6 @@ class HomePage extends Component {
         return apiMealList.map(apiMeal => new Meal(apiMeal));
     }
 
-    sortElementListByName(elementList: any[]) {
-        elementList = elementList.sort((elementA, elementB) => {
-            return elementA.name.localeCompare(elementB.name);
-        });
-        return elementList;
-    }
-
     clearSearch = () => {
         this.setState({
             mealList: [],
@@ -83,10 +78,12 @@ class HomePage extends Component {
 
         return (
             <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-white font-bold font-title">
+                <h1 className="text-4xl text-center text-white font-bold font-title
+                    md:text-5xl lg:text-6xl">
                     My Meal Book
                 </h1>
-                <h2 className="text-md md:text-lg lg:text-xl text-center text-white mt-2 font-semibold font-body">
+                <h2 className="text-md text-center text-white mt-2 font-semibold font-body
+                    md:text-lg lg:text-xl">
                     Looking for delicious meals and recipes?
                     <br />
                     We got your back!
@@ -100,20 +97,17 @@ class HomePage extends Component {
                 </div>
 
                 {(!isLoading && mealList.length === 0) &&
-                    <SurpriseMeButton />
+                    <>
+                        <CategoryList />
+                        <SurpriseMeButton />
+                    </>
                 }
 
                 {isLoading &&
                     <LoadingLabel labelText="Searching..." />
                 }
 
-                <div className="item-list">
-                    <ul>
-                        {mealList.map((meal: any) => (
-                            <MealItem key={meal.id} meal={meal} />
-                        ))}
-                    </ul>
-                </div>
+                <MealList items={mealList} />
             </div>
         )
     }

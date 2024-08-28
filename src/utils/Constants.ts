@@ -1,1 +1,1 @@
-export const theMealDbEndpoint: string = "https://themealdb.com/api/json/v1/1";
+export const THE_MEALDB_ENDPOINT: string = "https://themealdb.com/api/json/v1/1";
