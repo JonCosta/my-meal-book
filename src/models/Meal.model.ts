@@ -75,12 +75,16 @@ class Meal {
 
     private setIngredientListFromObject(mealFromApi: any) {
         for (let index = 1; index <= 20; index++) {
-            const ingredientAtIndex = mealFromApi["strIngredient" + index];
-            const measureAtIndex = mealFromApi["strMeasure" + index];
+            let ingredientKey = "strIngredient" + index;
+            if (Object.prototype.hasOwnProperty.call(mealFromApi, ingredientKey)) {
+                const ingredientAtIndex = mealFromApi["strIngredient" + index];
+                const measureAtIndex = mealFromApi["strMeasure" + index];
 
-            if (!isStringEmpty(ingredientAtIndex)) {
-                let ingredient = new Ingredient(ingredientAtIndex, measureAtIndex);
-                this.ingredients.push(ingredient);
+                if (!isStringEmpty(ingredientAtIndex)) {
+                    let ingredient = new Ingredient(ingredientAtIndex, measureAtIndex);
+                    this.ingredients.push(ingredient);
+
+                }
             }
         }
     }

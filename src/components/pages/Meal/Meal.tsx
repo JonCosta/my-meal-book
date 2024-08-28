@@ -14,10 +14,10 @@ const MealPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        fetchRecipeById(id);
+        fetchMealById(id);
     }, [id]);
 
-    const fetchRecipeById = async (id: string | undefined) => {
+    const fetchMealById = async (id: string | undefined) => {
         if (id === undefined) return;
         setIsLoading(true);
 

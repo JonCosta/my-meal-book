@@ -127,9 +127,9 @@ class HomePage extends Component {
 
                 {(!isLoading && mealList.length === 0) &&
                     <>
-                        <div className="grid grid-cols-3 gap-2 mb-4">
-                            {categoryList.map((category: any) => (
-                                <CategoryItem category={category} />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
+                            {categoryList.map((category: Category) => (
+                                <CategoryItem key={category.id} category={category} />
                             ))}
                         </div>
 
@@ -143,7 +143,7 @@ class HomePage extends Component {
 
                 <div className="item-list">
                     <ul>
-                        {mealList.map((meal: any) => (
+                        {mealList.map((meal: Meal) => (
                             <MealItem key={meal.id} meal={meal} />
                         ))}
                     </ul>
