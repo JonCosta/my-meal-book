@@ -6,7 +6,7 @@ import { THE_MEALDB_ENDPOINT } from '../../../utils/Constants';
 import { sortElementListByName } from '../../../utils/StringUtils';
 import HomeButton from '../../common/HomeButton/HomeButton';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
-import MealItem from '../../common/MealItem/MealItem';
+import MealList from '../../common/MealList/MealList';
 
 const CategoryPage: React.FC = () => {
     const { category } = useParams();
@@ -40,12 +40,9 @@ const CategoryPage: React.FC = () => {
 
     }, [category]);
 
-
     const generateMealListFromApiResponse = (apiMealList: any[]): Meal[] => {
         return apiMealList.map(apiMeal => new Meal(apiMeal));
     }
-
-
 
     return (
         <div>
@@ -56,17 +53,12 @@ const CategoryPage: React.FC = () => {
                 <>
                     <HomeButton />
 
-                    <h1 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold capitalize pb-3 font-title">
+                    <h1 className="text-center text-3xl font-bold capitalize pb-3 mb-3 font-title
+                        md:text-4xl lg:text-5xl">
                         {category} Recipes
                     </h1>
 
-                    <div className="item-list">
-                        <ul>
-                            {mealList.map((meal: any) => (
-                                <MealItem key={meal.id} meal={meal} />
-                            ))}
-                        </ul>
-                    </div>
+                    <MealList items={mealList} />
                 </>
             }
         </div>

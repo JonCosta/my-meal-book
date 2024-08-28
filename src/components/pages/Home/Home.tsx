@@ -1,27 +1,22 @@
 import axios from "axios";
 import { Component } from "react";
-import Category from "../../../models/Category.model";
 import Meal from "../../../models/Meal.model";
 import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
-import CategoryItem from "../../common/CategoryItem/CategoryItem";
+import { sortElementListByName } from "../../../utils/StringUtils";
+import CategoryList from "../../common/CategoryList/CategoryList";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
-import MealItem from "../../common/MealItem/MealItem";
+import MealList from "../../common/MealList/MealList";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
 
 class HomePage extends Component {
 
     state = {
-        categoryList: [],
         isLoading: false,
         mealList: [],
         searchQuery: ''
     };
 
     searchTimer: any = null;
-
-    componentDidMount(): void {
-        this.fetchCategoryList();
-    }
 
     handleChangeSearch = (event: any) => {
         const query = event.target.value;
@@ -44,7 +39,7 @@ class HomePage extends Component {
 
             if (response.data.meals != null) {
                 let mealList = this.generateMealListFromApiResponse(response.data.meals);
-                mealList = this.sortElementListByName(mealList);
+                mealList = sortElementListByName(mealList);
 
                 this.setState({
                     isLoading: false,
@@ -67,34 +62,8 @@ class HomePage extends Component {
         }
     }
 
-    fetchCategoryList = async () => {
-        try {
-            const response = await axios.get(`${THE_MEALDB_ENDPOINT}/categories.php`);
-            let categoryList = this.generateCategoryListFromApiResponse(response.data.categories);
-            categoryList = this.sortElementListByName(categoryList);
-
-            this.setState({
-                categoryList: categoryList,
-            });
-
-        } catch (fetchError) {
-            console.error(fetchError);
-        }
-    }
-
     generateMealListFromApiResponse(apiMealList: any[]) {
         return apiMealList.map(apiMeal => new Meal(apiMeal));
-    }
-
-    generateCategoryListFromApiResponse(apiCategoryList: any[]) {
-        return apiCategoryList.map(apiCategory => new Category(apiCategory));
-    }
-
-    sortElementListByName(elementList: any[]) {
-        elementList = elementList.sort((elementA, elementB) => {
-            return elementA.name.localeCompare(elementB.name);
-        });
-        return elementList;
     }
 
     clearSearch = () => {
@@ -105,14 +74,16 @@ class HomePage extends Component {
     }
 
     render() {
-        const { mealList, isLoading, categoryList } = this.state;
+        const { mealList, isLoading } = this.state;
 
         return (
             <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-white font-bold font-title">
+                <h1 className="text-4xl text-center text-white font-bold font-title
+                    md:text-5xl lg:text-6xl">
                     My Meal Book
                 </h1>
-                <h2 className="text-md md:text-lg lg:text-xl text-center text-white mt-2 font-semibold font-body">
+                <h2 className="text-md text-center text-white mt-2 font-semibold font-body
+                    md:text-lg lg:text-xl">
                     Looking for delicious meals and recipes?
                     <br />
                     We got your back!
@@ -127,12 +98,7 @@ class HomePage extends Component {
 
                 {(!isLoading && mealList.length === 0) &&
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
-                            {categoryList.map((category: Category) => (
-                                <CategoryItem key={category.id} category={category} />
-                            ))}
-                        </div>
-
+                        <CategoryList />
                         <SurpriseMeButton />
                     </>
                 }
@@ -141,13 +107,7 @@ class HomePage extends Component {
                     <LoadingLabel labelText="Searching..." />
                 }
 
-                <div className="item-list">
-                    <ul>
-                        {mealList.map((meal: Meal) => (
-                            <MealItem key={meal.id} meal={meal} />
-                        ))}
-                    </ul>
-                </div>
+                <MealList items={mealList} />
             </div>
         )
     }
