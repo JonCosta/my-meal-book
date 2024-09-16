@@ -1,4 +1,3 @@
-import { isStringEmpty } from "../utils/StringUtils";
 import Ingredient from "./Ingredient";
 
 class Meal {
@@ -12,7 +11,7 @@ class Meal {
     youtubeLink: string;
     ingredients: Ingredient[];
 
-    constructor(mealFromAPI?: any) {
+    constructor(meal?: any) {
         this.id = 0;
         this.name = '';
         this.urlThumbnail = '';
@@ -23,74 +22,17 @@ class Meal {
         this.youtubeLink = '';
         this.ingredients = [];
 
-        if (mealFromAPI) {
-            this.setPropertiesFromObject(mealFromAPI);
-            this.setIngredientListFromObject(mealFromAPI);
+        if (meal) {
+            this.id = meal.id;
+            this.name = meal.name;
+            this.urlThumbnail = meal.urlThumbnail;
+            this.area = meal.area;
+            this.category = meal.category;
+            this.instructions = meal.instructions;
+            this.source = meal.source;
+            this.youtubeLink = meal.youtubeLink;
+            this.ingredients = meal.ingredients;
         }
-    }
-
-    private setPropertiesFromObject(mealFromApi: any) {
-        for (const key in mealFromApi) {
-            if (Object.prototype.hasOwnProperty.call(mealFromApi, key)) {
-                const mealProperty = mealFromApi[key];
-                switch (key) {
-                    case "idMeal":
-                        this.id = mealProperty;
-                        break;
-
-                    case "strMeal":
-                        this.name = mealProperty;
-                        break;
-
-                    case "strArea":
-                        this.area = mealProperty;
-                        break;
-
-                    case "strCategory":
-                        this.category = mealProperty;
-                        break;
-
-                    case "strMealThumb":
-                        this.urlThumbnail = mealProperty;
-                        break;
-
-                    case "strInstructions":
-                        this.instructions = mealProperty;
-                        break;
-
-                    case "strSource":
-                        this.source = mealProperty;
-                        break;
-
-                    case "strYoutube":
-                        this.youtubeLink = this.formatYoutubeLink(mealProperty);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-    private setIngredientListFromObject(mealFromApi: any) {
-        for (let index = 1; index <= 20; index++) {
-            let ingredientKey = "strIngredient" + index;
-            if (Object.prototype.hasOwnProperty.call(mealFromApi, ingredientKey)) {
-                const ingredientAtIndex = mealFromApi["strIngredient" + index];
-                const measureAtIndex = mealFromApi["strMeasure" + index];
-
-                if (!isStringEmpty(ingredientAtIndex)) {
-                    let ingredient = new Ingredient(ingredientAtIndex, measureAtIndex);
-                    this.ingredients.push(ingredient);
-
-                }
-            }
-        }
-    }
-
-    private formatYoutubeLink(youtubeLink: string) {
-        return youtubeLink.replaceAll("watch?v=", "embed/");
     }
 
 }

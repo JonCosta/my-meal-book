@@ -1,8 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
-import Meal from "../../../models/Meal.model";
 import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
-import { sortElementListByName } from "../../../utils/StringUtils";
+import { createMealFromMealApiObject, sortElementListByName } from "../../../utils/StringUtils";
 import CategoryList from "../../common/CategoryList/CategoryList";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import MealList from "../../common/MealList/MealList";
@@ -63,7 +62,7 @@ class HomePage extends Component {
     }
 
     generateMealListFromApiResponse(apiMealList: any[]) {
-        return apiMealList.map(apiMeal => new Meal(apiMeal));
+        return apiMealList.map(apiMeal => createMealFromMealApiObject(apiMeal));
     }
 
     clearSearch = () => {

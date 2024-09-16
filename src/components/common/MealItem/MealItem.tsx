@@ -19,7 +19,7 @@ const MealItem: React.FC<MealItemProps> = ({ meal }) => {
             <div className="flex min-w-0 gap-x-2 md:gap-x-4 items-center">
                 <img className="h-12 w-12 flex-none rounded-full bg-gray-50 items-center
                     md:h-24 md:w-24 ml-2 md:ml-3"
-                    src={meal.urlThumbnail} alt="" />
+                    src={meal.urlThumbnail} alt="Meal Thumbnail" />
                 <div className="min-w-0 flex-auto">
                     <span className="meal-title text-base md:text-2xl font-semibold leading-6 text-white"
                         onClick={handleItemClick}>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Meal from '../../../models/Meal.model';
 import { THE_MEALDB_ENDPOINT } from '../../../utils/Constants';
-import { sortElementListByName } from '../../../utils/StringUtils';
+import { createMealFromMealApiObject, sortElementListByName } from '../../../utils/StringUtils';
 import HomeButton from '../../common/HomeButton/HomeButton';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import MealList from '../../common/MealList/MealList';
@@ -41,7 +41,7 @@ const CategoryPage: React.FC = () => {
     }, [category]);
 
     const generateMealListFromApiResponse = (apiMealList: any[]): Meal[] => {
-        return apiMealList.map(apiMeal => new Meal(apiMeal));
+        return apiMealList.map(apiMeal => createMealFromMealApiObject(apiMeal));
     }
 
     return (
