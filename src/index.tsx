@@ -1,4 +1,5 @@
 import React from 'react';
+import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './assets/styles/global.css';
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <App />
+        <CookiesProvider defaultSetOptions={{ path: '/' }}>
+            <App />
+        </CookiesProvider>
     </React.StrictMode>
 );
 

@@ -19,7 +19,7 @@ export const createMealFromMealApiObject = (mealApiObject: any): Meal => {
             const mealProperty = mealApiObject[key];
             switch (key) {
                 case "idMeal":
-                    meal.id = mealProperty;
+                    meal.id = Number(mealProperty);
                     break;
 
                 case "strMeal":
