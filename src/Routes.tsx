@@ -2,6 +2,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-d
 import Layout from "./components/common/Layout/Layout";
 import AboutPage from "./components/pages/About/About";
 import CategoryPage from "./components/pages/Category/Category";
+import FavoritePage from "./components/pages/Favorite/Favorite";
 import HomePage from "./components/pages/Home/Home";
 import MealPage from "./components/pages/Meal/Meal";
 
@@ -14,6 +15,7 @@ function AppRoutes() {
                     <Route path="/about" Component={AboutPage} />
                     <Route path="/meal/:id" Component={MealPage} />
                     <Route path="/category/:category" Component={CategoryPage} />
+                    <Route path="/favorites" Component={FavoritePage} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>
             </Routes>

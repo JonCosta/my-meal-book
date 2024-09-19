@@ -7,8 +7,9 @@ import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
 import MealList from "../../common/MealList/MealList";
 import SurpriseMeButton from "../../common/SurpriseMeButton/SurpriseMeButton";
 
-import { FaceFrownIcon } from "@heroicons/react/16/solid";
+import { FaceFrownIcon, HeartIcon } from "@heroicons/react/16/solid";
 import React from 'react';
+import { Link } from "react-router-dom";
 import Meal from "../../../models/Meal.model";
 
 const HomePage: React.FC = () => {
@@ -79,6 +80,16 @@ const HomePage: React.FC = () => {
 
     return (
         <div>
+            <div className="w-100 text-right">
+                <Link to="/favorites"
+                    className="text-white text-center inline-flex items-center mb-5
+                        font-semibold border-2 border-white rounded-full px-2 py-1
+                        hover:bg-white hover:text-black">
+                    <HeartIcon className="size-4 mr-1 font-bold" />
+                    <span>Favorites</span>
+                </Link>
+            </div>
+
             <h1 className="text-4xl text-center text-white font-bold font-title
                     md:text-5xl lg:text-6xl">
                 My Meal Book
