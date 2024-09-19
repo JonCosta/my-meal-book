@@ -2,6 +2,7 @@ import { HeartIcon } from "@heroicons/react/16/solid";
 import { HeartIcon as HeartIconOutline } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { toast } from "react-toastify";
 import Meal from '../../../models/Meal.model';
 import { addMealToFavorites, fetchFavoriteMealIdList, removeMealFromFavorites, setCookie } from "../../../services/cookiesService";
 import { COOKIE_FAVORITES } from '../../../utils/Constants';
@@ -20,9 +21,11 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ meal }) => {
             if (favoriteMealsList.includes(meal.id)) {
                 removeMealFromFavorites(meal);
                 setIsFavorite(false);
+                toast.info("Meal removed from favorites!");
             } else {
                 addMealToFavorites(meal);
                 setIsFavorite(true);
+                toast.success("Meal added to favorites!");
             }
 
         } else {

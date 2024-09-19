@@ -46,3 +46,13 @@ code {
 .center-container {
     @apply px-4 py-6 h-auto text-white;
 }
+
+.Toastify__toast-theme--colored.Toastify__toast--default {
+    background-color: #249e61;
+    color: white;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+    background-color: #AA8E86;
+    color: white;
+}
