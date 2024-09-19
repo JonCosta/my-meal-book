@@ -8,7 +8,7 @@ export const setCookie = (name: string, value: string, options: object = {}) => 
     cookies.set(name, value, { path: '/', ...options });
 }
 
-export const getCookie = (name: string): string | undefined => {
+export const getCookieByName = (name: string): string | undefined => {
     return cookies.get(name);
 };
 
@@ -17,7 +17,7 @@ export const removeCookie = (name: string, options: object = {}) => {
 };
 
 export const fetchFavoriteMealIdList = (): number[] => {
-    const favoriteMealString: string = "" + cookies.get(COOKIE_FAVORITES);
+    const favoriteMealString: string = "" + getCookieByName(COOKIE_FAVORITES);
     const favoriteMealStringList = favoriteMealString.split(':');
     const favoriteMealIdList: number[] = favoriteMealStringList.map(f => Number(f));
     return favoriteMealIdList;
@@ -39,4 +39,3 @@ export const updateFavoriteMealsCookie = (mealIdList: number[]) => {
     const favoritesString: string = mealIdList.join(':');
     setCookie(COOKIE_FAVORITES, favoritesString);
 }
-
