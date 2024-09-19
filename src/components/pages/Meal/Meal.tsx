@@ -5,9 +5,10 @@ import Ingredient from "../../../models/Ingredient";
 import Meal from "../../../models/Meal.model";
 import { THE_MEALDB_ENDPOINT } from "../../../utils/Constants";
 import { createMealFromMealApiObject } from "../../../utils/StringUtils";
+import BackButton from "../../common/BackButton/BackButton";
 import FavoriteButton from "../../common/FavoriteButton/FavoriteButton";
-import HomeButton from "../../common/HomeButton/HomeButton";
 import LoadingLabel from "../../common/LoadingLabel/LoadingLabel";
+import Title from "../../common/Title/Title";
 import "./Meal.css";
 
 const MealPage: React.FC = () => {
@@ -45,13 +46,11 @@ const MealPage: React.FC = () => {
             {(meal.id !== 0 && !isLoading) &&
                 <>
                     <div className="flex flex-row justify-between">
-                        <HomeButton />
+                        <BackButton />
                         <FavoriteButton meal={meal} />
                     </div>
 
-                    <h1 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold capitalize pb-3 font-title">
-                        {meal.name}
-                    </h1>
+                    <Title label={meal.name} />
                     <img className="h-32 w-32 md:h-48 md:w-48 lg:h-60 lg:w-60 rounded mx-auto mb-5"
                         src={meal.urlThumbnail} alt="" />
 
@@ -83,13 +82,13 @@ const MealPage: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* {meal.youtubeLink &&
+                    {meal.youtubeLink &&
                         <div className="mb-5 h-96">
                             <iframe id="meal-video" title="Instructions Video" className="mx-auto" width="100%" height="100%"
                                 src={meal.youtubeLink}>
                             </iframe>
                         </div>
-                    } */}
+                    }
                 </>
             }
         </div>

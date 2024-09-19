@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import Meal from '../../../models/Meal.model';
 import { THE_MEALDB_ENDPOINT } from '../../../utils/Constants';
 import { createMealFromMealApiObject, sortElementListByName } from '../../../utils/StringUtils';
-import HomeButton from '../../common/HomeButton/HomeButton';
+import BackButton from '../../common/BackButton/BackButton';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import MealList from '../../common/MealList/MealList';
+import Title from '../../common/Title/Title';
 
 const CategoryPage: React.FC = () => {
     const { category } = useParams();
@@ -51,13 +52,8 @@ const CategoryPage: React.FC = () => {
             }
             {!isLoading &&
                 <>
-                    <HomeButton />
-
-                    <h1 className="text-center text-3xl font-bold capitalize pb-3 mb-3 font-title
-                        md:text-4xl lg:text-5xl">
-                        {category} Recipes
-                    </h1>
-
+                    <BackButton />
+                    <Title label={`${category} Recipes`} />
                     <MealList items={mealList} />
                 </>
             }

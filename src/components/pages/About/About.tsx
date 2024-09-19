@@ -1,11 +1,11 @@
 import AboutItem from "../../common/AboutItem/AboutItem";
-import HomeButton from "../../common/HomeButton/HomeButton";
+import BackButton from "../../common/BackButton/BackButton";
 
 const AboutPage: React.FC = () => {
 
     return (
         <>
-            <HomeButton />
+            <BackButton />
             <div className="flex flex-col gap-8">
 
                 <AboutItem
